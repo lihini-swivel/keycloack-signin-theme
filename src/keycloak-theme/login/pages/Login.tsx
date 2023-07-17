@@ -6,6 +6,7 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
+import Button from "@mui/material/Button";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -157,20 +158,36 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                           }
                                         : {})}
                                 />
-                                <input
+                                <Button
+                                       variant='contained'
+                                 sx={{
+                                    backgroundColor: '#2C58C1',
+                                    fontFamily: 'Poppins',
+                                    fontWeight: '600',
+                                    fontSize: '16px',
+                                    lineHeight: '24px',
+                                    textTransform: 'capitalize',
+                                    borderRadius: '4px',
+                                    height: '42px',
+                                    width:'100%',
+                                    mr: '30px',
+                                    '&:hover': {
+                                      backgroundColor: '#2C58C1',
+                                    },
+                                  }}
                                     tabIndex={4}
-                                    className={clsx(
-                                        getClassName("kcButtonClass"),
-                                        getClassName("kcButtonPrimaryClass"),
-                                        getClassName("kcButtonBlockClass"),
-                                        getClassName("kcButtonLargeClass")
-                                    )}
+                                    // className={clsx(
+                                    //     getClassName("kcButtonClass"),
+                                    //     getClassName("kcButtonPrimaryClass"),
+                                    //     getClassName("kcButtonBlockClass"),
+                                    //     getClassName("kcButtonLargeClass")
+                                    // )}
                                     name="login"
                                     id="kc-login"
                                     type="submit"
                                     value={msgStr("doLogIn")}
                                     disabled={isLoginButtonDisabled}
-                                />
+                                >{msgStr("doLogIn")}</Button>
                             </div>
                         </form>
                     )}
