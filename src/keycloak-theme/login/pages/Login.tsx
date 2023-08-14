@@ -47,7 +47,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 realm.password &&
                 realm.registrationAllowed &&
                 !registrationDisabled && (
-                    <div id="kc-registration">
+                    <div id="kc-registration" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '600', fontStyle: 'normal' }}>
                         <span>
                             {msg("noAccount")}
                             <a tabIndex={6} href={url.registrationUrl}>
@@ -132,7 +132,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 <div id="kc-form-options">
                                     {realm.rememberMe && !usernameEditDisabled && (
                                         <div className="checkbox">
-                                            <label>
+                                            <label style={{ color: '#2C58C1', 
+                                                fontFamily: 'Poppins, sans-serif',
+                                                fontWeight: '400',
+                                                fontSize: '16px',
+                                                lineHeight:'normal', }}>
                                                 <input
                                                     tabIndex={3}
                                                     id="rememberMe"
@@ -149,10 +153,16 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         </div>
                                     )}
                                 </div>
-                                <div className={getClassName("kcFormOptionsWrapperClass")}>
+                                <div className={getClassName("kcFormOptionsWrapperClass")} >
                                     {realm.resetPasswordAllowed && (
-                                        <span>
-                                            <a tabIndex={5} href={url.loginResetCredentialsUrl}>
+                                        <span >
+                                            <a style={{
+                                                color: '#2C58C1', 
+                                                fontFamily: 'Poppins, sans-serif',
+                                                fontWeight: '400',
+                                                fontSize: '16px',
+                                                lineHeight:'normal',
+                                            }} tabIndex={5} href={url.loginResetCredentialsUrl}>
                                                 {msg("doForgotPassword")}
                                             </a>
                                         </span>
@@ -171,13 +181,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         : {})}
                                 />
                                 <Button
-                                    variant='contained'
+                                    variant='contained' 
                                     sx={{
                                         backgroundColor: '#2C58C1',
-                                        fontFamily: 'Poppins',
+                                        fontFamily: 'Poppins, sans-serif',
+                                    
+                                        lineHeight: 'normal',
                                         fontWeight: '600',
                                         fontSize: '16px',
-                                        lineHeight: '24px',
+                                       
                                         textTransform: 'capitalize',
                                         borderRadius: '4px',
                                         height: '42px',
@@ -186,6 +198,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         '&:hover': {
                                             backgroundColor: '#2C58C1',
                                         },
+                                        
                                     }}
                                     tabIndex={4}
                                     // className={clsx(

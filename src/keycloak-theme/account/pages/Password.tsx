@@ -118,9 +118,21 @@ export default function LogoutConfirm(
           <div
             id='kc-form-buttons'
             className='col-md-offset-2 col-md-10 submit'
+            style={{
+              fontFamily: 'Poppins, sans-serif',
+              fontWeight: '600',
+              fontSize: '16px',
+              lineHeight: 'normal',
+            }}
           >
             <div>
               <Button
+                sx={{
+                  fontFamily: 'Poppins, sans-serif',
+                  fontWeight: '600',
+                  fontSize: '16px',
+                  lineHeight: 'normal',
+                }}
                 type='submit'
                 // className={clsx(
                 //   getClassName('kcButtonClass'),
