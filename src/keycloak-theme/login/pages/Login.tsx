@@ -7,6 +7,7 @@ import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -46,7 +47,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 realm.password &&
                 realm.registrationAllowed &&
                 !registrationDisabled && (
-                    <div id="kc-registration">
+                    <div id="kc-registration" style={{ fontFamily: 'Poppins, sans-serif', fontSize: '16px', fontWeight: '600', fontStyle: 'normal' }}>
                         <span>
                             {msg("noAccount")}
                             <a tabIndex={6} href={url.registrationUrl}>
@@ -62,7 +63,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     id="kc-form-wrapper"
                     className={clsx(
                         realm.password &&
-                            social.providers && [getClassName("kcFormSocialAccountContentClass"), getClassName("kcFormSocialAccountClass")]
+                        social.providers && [getClassName("kcFormSocialAccountContentClass"), getClassName("kcFormSocialAccountClass")]
                     )}
                 >
                     {realm.password && (
@@ -72,8 +73,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     const label = !realm.loginWithEmailAllowed
                                         ? "username"
                                         : realm.registrationEmailAsUsername
-                                        ? "email"
-                                        : "usernameOrEmail";
+                                            ? "email"
+                                            : "usernameOrEmail";
 
                                     const autoCompleteHelper: typeof label = label === "usernameOrEmail" ? "username" : label;
 
@@ -82,10 +83,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                             <label htmlFor={autoCompleteHelper} className={getClassName("kcLabelClass")}>
                                                 {msg(label)}
                                             </label>
-                                            <input
+                                            <TextField
+                                                sx={{
+                                                    width: '100%',
+                                                    borderRadius: '4px',
+                                                    borderColor: '#C2C2C2',
+                                                }}
                                                 tabIndex={1}
                                                 id={autoCompleteHelper}
-                                                className={getClassName("kcInputClass")}
+                                                // className={getClassName("kcInputClass")}
                                                 //NOTE: This is used by Google Chrome auto fill so we use it to tell
                                                 //the browser how to pre fill the form but before submit we put it back
                                                 //to username because it is what keycloak expects.
@@ -95,9 +101,9 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                 {...(usernameEditDisabled
                                                     ? { "disabled": true }
                                                     : {
-                                                          "autoFocus": true,
-                                                          "autoComplete": "off"
-                                                      })}
+                                                        "autoFocus": true,
+                                                        "autoComplete": "off"
+                                                    })}
                                             />
                                         </>
                                     );
@@ -107,20 +113,30 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 <label htmlFor="password" className={getClassName("kcLabelClass")}>
                                     {msg("password")}
                                 </label>
-                                <input
+                                <TextField
+                                    sx={{
+                                        width: '100%',
+                                        borderRadius: '4px',
+                                        borderColor: '#C2C2C2',
+                                    }}
                                     tabIndex={2}
                                     id="password"
-                                    className={getClassName("kcInputClass")}
+                                    // className={getClassName("kcInputClass")}
                                     name="password"
                                     type="password"
                                     autoComplete="off"
+                                    variant="outlined"
                                 />
                             </div>
                             <div className={clsx(getClassName("kcFormGroupClass"), getClassName("kcFormSettingClass"))}>
                                 <div id="kc-form-options">
                                     {realm.rememberMe && !usernameEditDisabled && (
                                         <div className="checkbox">
-                                            <label>
+                                            <label style={{ color: '#2C58C1', 
+                                                fontFamily: 'Poppins, sans-serif',
+                                                fontWeight: '400',
+                                                fontSize: '16px',
+                                                lineHeight:'normal', }}>
                                                 <input
                                                     tabIndex={3}
                                                     id="rememberMe"
@@ -128,8 +144,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     type="checkbox"
                                                     {...(login.rememberMe
                                                         ? {
-                                                              "checked": true
-                                                          }
+                                                            "checked": true
+                                                        }
                                                         : {})}
                                                 />
                                                 {msg("rememberMe")}
@@ -137,10 +153,16 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         </div>
                                     )}
                                 </div>
-                                <div className={getClassName("kcFormOptionsWrapperClass")}>
+                                <div className={getClassName("kcFormOptionsWrapperClass")} >
                                     {realm.resetPasswordAllowed && (
-                                        <span>
-                                            <a tabIndex={5} href={url.loginResetCredentialsUrl}>
+                                        <span >
+                                            <a style={{
+                                                color: '#2C58C1', 
+                                                fontFamily: 'Poppins, sans-serif',
+                                                fontWeight: '400',
+                                                fontSize: '16px',
+                                                lineHeight:'normal',
+                                            }} tabIndex={5} href={url.loginResetCredentialsUrl}>
                                                 {msg("doForgotPassword")}
                                             </a>
                                         </span>
@@ -154,27 +176,30 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     name="credentialId"
                                     {...(auth?.selectedCredential !== undefined
                                         ? {
-                                              "value": auth.selectedCredential
-                                          }
+                                            "value": auth.selectedCredential
+                                        }
                                         : {})}
                                 />
                                 <Button
-                                       variant='contained'
-                                 sx={{
-                                    backgroundColor: '#2C58C1',
-                                    fontFamily: 'Poppins',
-                                    fontWeight: '600',
-                                    fontSize: '16px',
-                                    lineHeight: '24px',
-                                    textTransform: 'capitalize',
-                                    borderRadius: '4px',
-                                    height: '42px',
-                                    width:'100%',
-                                    mr: '30px',
-                                    '&:hover': {
-                                      backgroundColor: '#2C58C1',
-                                    },
-                                  }}
+                                    variant='contained' 
+                                    sx={{
+                                        backgroundColor: '#2C58C1',
+                                        fontFamily: 'Poppins, sans-serif',
+                                    
+                                        lineHeight: 'normal',
+                                        fontWeight: '600',
+                                        fontSize: '16px',
+                                       
+                                        textTransform: 'capitalize',
+                                        borderRadius: '4px',
+                                        height: '42px',
+                                        width: '100%',
+                                        mr: '30px',
+                                        '&:hover': {
+                                            backgroundColor: '#2C58C1',
+                                        },
+                                        
+                                    }}
                                     tabIndex={4}
                                     // className={clsx(
                                     //     getClassName("kcButtonClass"),

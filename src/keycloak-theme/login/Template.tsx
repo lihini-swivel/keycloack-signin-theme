@@ -7,7 +7,11 @@ import { type TemplateProps } from "keycloakify/login/TemplateProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
-
+import Box from "@mui/material/Box";
+import CardMedia from '@mui/material/CardMedia';
+import Card from '@mui/material/Card';
+import templateBackground from '../login/assets/background_signin_template.png'
+import logo from '../login/assets/logo.png'
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
         displayInfo = false,
@@ -49,14 +53,20 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     }
 
     return (
-        <div className={getClassName("kcLoginClass")}>
-            <div id="kc-header" className={getClassName("kcHeaderClass")}>
-                <div id="kc-header-wrapper" className={getClassName("kcHeaderWrapperClass")}>
-                    {msg("loginTitleHtml", realm.displayNameHtml)}
+
+        <div className={getClassName("kcLoginClass")} style={{ width: "100%", display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+            <div id="kc-header" className={getClassName("kcHeaderClass")} style={{ marginBottom: '0px' }}>
+                <div id="kc-header-wrapper" className={getClassName("kcHeaderWrapperClass")} 
+                style={{ color: 'white', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', 
+                fontFamily:'Montserrat, sans-serif', textTransform:'capitalize', fontSize:'30px',fontStyle:'normal',fontWeight:'600'}}>
+                    <img src={logo} alt="Logo" width="100" height="100" style={{ marginBottom: '15px' }} />
+                    Welcome to Gene!
+                    {/* {msg("loginTitleHtml", realm.displayNameHtml)} */}
                 </div>
             </div>
 
-            <div className={clsx(getClassName("kcFormCardClass"), displayWide && getClassName("kcFormCardAccountClass"))}>
+
+            <div className={clsx(displayWide && getClassName("kcFormCardAccountClass"))}>
                 <header className={getClassName("kcFormHeaderClass")}>
                     {realm.internationalizationEnabled && (assert(locale !== undefined), true) && locale.supported.length > 1 && (
                         <div id="kc-locale">
@@ -90,11 +100,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                     </span>
                                 </div>
                                 <div className="col-md-10">
-                                    <h1 id="kc-page-title">{headerNode}</h1>
+                                    {/* <h1 id="kc-page-title">{headerNode}</h1> */}
                                 </div>
                             </div>
-                        ) : (
-                            <h1 id="kc-page-title">{headerNode}</h1>
+                        ) : (<></>
+                            // <h1 id="kc-page-title">{headerNode}</h1>
                         )
                     ) : displayRequiredFields ? (
                         <div className={getClassName("kcContentWrapperClass")}>
@@ -105,7 +115,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             </div>
                             <div className="col-md-10">
                                 {showUsernameNode}
-                                <div className={getClassName("kcFormGroupClass")}>
+                                <div className={getClassName("kcFormGroupClass")} style={{}}>
                                     <div id="kc-username">
                                         <label id="kc-attempted-username">{auth?.attemptedUsername}</label>
                                         <a id="reset-login" href={url.loginRestartFlowUrl}>
@@ -135,10 +145,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         </>
                     )}
                 </header>
-                <div id="kc-content">
-                    <div id="kc-content-wrapper">
+                <div id="kc-content" style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div id="kc-content-wrapper" style={{ background: 'white', padding: '40px', width:'549px' , borderRadius: '4px !important'}}>
+                        <div style={{color:'#2C58C1', textAlign:'center',fontFamily:'Montserrat, sans-serif', fontSize:'25px', fontStyle:'normal', fontWeight:'600'}}>Sign in</div>
                         {/* App-initiated actions should not see warning messages about the need to complete the action during login. */}
-                        {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
+                        {/* {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
                             <div className={clsx("alert", `alert-${message.type}`)}>
                                 {message.type === "success" && <span className={getClassName("kcFeedbackSuccessIcon")}></span>}
                                 {message.type === "warning" && <span className={getClassName("kcFeedbackWarningIcon")}></span>}
@@ -151,7 +162,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                     }}
                                 />
                             </div>
-                        )}
+                        )} */}
                         {children}
                         {auth !== undefined && auth.showTryAnotherWayLink && showAnotherWayIfPresent && (
                             <form
@@ -193,5 +204,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 </div>
             </div>
         </div>
+
+
     );
 }
